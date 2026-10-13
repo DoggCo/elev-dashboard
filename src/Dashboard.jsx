@@ -5,6 +5,15 @@ import { useEffect, useState } from "react"
 import ImgBox from "./imgBox"
 import outline from "./assets/outline.svg"
 
+/* 
+TODO list
+
+add a sidebar navbar.
+  - dashboard page
+  - settins page, for stuff like edu, background, maybe other stuff?
+
+*/
+
 export default function Dashboard() {
   const [today, setToday] = useState(new Date())
   const [microsoftExpanded, setMicrosoftExpanded] = useState(false)
