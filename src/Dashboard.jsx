@@ -9,16 +9,21 @@ export default function Dashboard() {
   const [today, setToday] = useState(new Date())
   const [microsoftExpanded, setMicrosoftExpanded] = useState(false)
   const [imagderExpanded, setImagderExpanded] = useState(false)
-  const [edu, setEdu] = useState("edu9334512")
-  const [proxmoxLink, setProxmoxLink] = useState(`https://${edu}.pm.sevgs.no`)
-
+  const [edu, setEdu] = useState(() => {
+    const saved = localStorage.getItem("edu")
+    return saved || "edu9334512"
+  })
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setToday(new Date())
     }, 999)
     return () => clearInterval(interval)
   }, [])
-
+  useEffect(() => {
+    localStorage.setItem("edu", edu)
+  }, [edu])
+  
   // https://date-fns.org/v4.4.0/docs/format
   const weekNum = getISOWeek(today)
   const day = format(today, "EEEE", { locale: nb })
@@ -27,6 +32,8 @@ export default function Dashboard() {
   const date = format(today, "P", { locale: nb })
   const clockTime = format(today, "pp", { locale: nb })
   const clockTimeAMPM = format(today, "p")
+  
+  const proxmoxLink = `https://${edu}.pm.sevgs.no`
 
   const dayButActuallyWrittenLikeASemiNormalHumanBeing = day[0].toUpperCase() + day.slice(1)
   const monthUpper = month[0].toUpperCase() + month.slice(1)
@@ -38,13 +45,10 @@ export default function Dashboard() {
         <Infobox title="Ukenummer" content={weekNum} />
         <Infobox title="Dag" content={dayButActuallyWrittenLikeASemiNormalHumanBeing} />
         <Infobox title="Dato" content={date} />
-        <Infobox title="Måned" content={<>{monthUpper} <br/> {monthNum} / 12</>} />
-        <Infobox title="Klokke" content={<>{clockTime} <br/> {clockTimeAMPM} </>} />
+        <Infobox title="Måned" content={<>{monthUpper} <br /> {monthNum} / 12</>} />
+        <Infobox title="Klokke" content={<>{clockTime} <br /> {clockTimeAMPM} </>} />
       </div>
 
-      <form className="inline-block bg-white text-black">
-        <input type="text" id="eduform" />
-      </form>
 
       {/* Row of image buttons which send you to a different pages */}
       <div className="flex">
@@ -63,8 +67,8 @@ export default function Dashboard() {
         {/* More regular image buttons */}
         <ImgBox link="https://agder.itslearning.com/CourseCards" imgLink="https://cdn.itslearning.com/v2026.10.1.10336/images/logo-badge.svg" />
         <ImgBox link="https://sameyde-vgs.inschool.visma.no/" imgLink="https://assets.inschool.visma.no/R-7.4.1.2-90e34c83/assets/images-new/favicons/favicon-32x32.png" />
-        
-        {/* Sam eyde button, which expands */}
+
+        {/* IMAgder button, which expands */}
         <div className="relative flex flex-col" onMouseEnter={() => setImagderExpanded(true)} onMouseLeave={() => setImagderExpanded(false)}>
           <ImgBox link="https://elev.imagder.no/" imgLink="https://elev.imagder.no/favicon.ico" />
 
@@ -76,6 +80,17 @@ export default function Dashboard() {
         </div>
 
       </div>
+      <form>
+        <input
+          className="inline-block bg-white text-black m-3"
+          name="dih" Value={edu}
+          onChange={(e) => {
+            e.preventDefault()
+            setEdu(e.target.value)
+          }}
+
+        />
+      </form>
 
       <h1>TEST</h1>
     </>
