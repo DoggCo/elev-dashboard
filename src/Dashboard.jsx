@@ -54,7 +54,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex h-screen">
-      <Navbar />
+      <Navbar edu={edu} setEdu={setEdu} />
       {/* Infoboxes at the top of the page. `justify-center` to center the boxes.*/}
       <div className="flex-1 overflow-auto">
 
@@ -98,19 +98,8 @@ export default function Dashboard() {
           {/* More space for regular images buttons here */}
 
         </div>
-        <form>
-          <input
-            className="inline-block bg-white text-black m-3"
-            name="dih" value={edu}
-            onChange={(e) => {
-              e.preventDefault()
-              setEdu(e.target.value)
-            }}
-
-          />
-        </form>
-
-        <h1 className="p-3">TEST</h1>
+        {/* Space for more components here. */}
+        
       </div>
     </div>
   )
