@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import Settingsfield from "./Components/settingsfield"
 import check from "./assets/check.svg"
+import SetText from "./Components/setText"
 
 export default function Settings({ setting, setSetting, edu, setEdu, bg, setBg }) {
 
@@ -31,30 +32,10 @@ export default function Settings({ setting, setSetting, edu, setEdu, bg, setBg }
           </div>
           <hr className="mx-3 mb-3 px-3 pb-3" />
           <Settingsfield Title="Edu navn" Description="Edu som er tilknyttet ulike lenker"
-            Content={
-              <form>
-                <input
-                  name="ya" value={edu}
-                  onChange={(e) => {
-                    e.preventDefault()
-                    setEdu(e.target.value)
-                  }}
-                />
-              </form>
-            }
+            Content={<SetText t={edu} setT={setEdu} />}
           />
           <Settingsfield Title="Background" Description="URL for background on dashboard. GIF virker også."
-            Content={
-              <form>
-                <input
-                  name="yeah" value={bg}
-                  onChange={(e) => {
-                    e.preventDefault()
-                    setBg(e.target.value)
-                  }}
-                />
-              </form>
-            }
+            Content={<SetText t={bg} setT={setBg} />}
           />
 
           <Settingsfield Title="Title" Description="Description" Content={<form><input name="test" defaultValue="test" className=""></input></form>} />
