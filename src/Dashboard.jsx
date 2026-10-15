@@ -48,16 +48,16 @@ export default function Dashboard() {
     let keys = "cat";
     const bgUrl = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F31%2Fa7%2F2a%2F31a72afda250825d993400c3ef28c55c.gif&f=1&nofb=1&ipt=4c8e50bf53e783409879cf5063387af5474ad962245221eb11121759f6b70017&ipo=images"
     const keyPress = (e) => {
-      keys += e.key.toLowerCase();
+      keys += e.key
 
-      if (keys.includes("gtown")) {
+      if (keys.includes("gTowN")) {
         setBg(bgUrl)
         localStorage.setItem("bg", bgUrl)
       }
-      if (keys.length > 6) {
-        keys = keys.slice(-6);
+      if (keys.length > 20) {
+        keys = keys.slice(-20);
       }
-      console.log(keys)
+      keys = keys.replace("Shift", "")
     };
     window.addEventListener("keydown", keyPress);
     return () => window.removeEventListener("keydown", keyPress);
