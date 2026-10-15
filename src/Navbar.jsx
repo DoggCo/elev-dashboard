@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Settings from "./settings"
 
-export default function Navbar({edu, setEdu}) {
+export default function Navbar({edu, setEdu, bg, setBg}) {
 
   const [setting, setSetting] = useState(false)
   // todo border on right side
@@ -15,7 +15,7 @@ export default function Navbar({edu, setEdu}) {
         </div>
       </nav>
 
-      {setting && <Settings setting={setting} setSetting={setSetting} edu={edu} setEdu={setEdu} />}
+      {setting && <Settings setting={setting} setSetting={setSetting} edu={edu} setEdu={setEdu} bg={bg} setBg={setBg} />}
     </>
   )
 }

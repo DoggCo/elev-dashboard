@@ -22,7 +22,11 @@ export default function Dashboard() {
   // Tries to get edu from localstorage and set it into the edu state, if it doesnt exist then "edu" is default
   const [edu, setEdu] = useState(() => {
     const saved = localStorage.getItem("edu")
-    return saved || "edu"
+    return saved || "edu0000000"
+  })
+  const [bg, setBg] = useState(() => {
+    const saved = localStorage.getItem("bg")
+    return saved || ""
   })
 
   // Updates the current time every 999 ms
@@ -37,6 +41,28 @@ export default function Dashboard() {
   useEffect(() => {
     localStorage.setItem("edu", edu)
   }, [edu])
+  useEffect(() => {
+    localStorage.setItem("bg", bg)
+  }, [bg])
+  useEffect(() => {
+    let keys = "cat";
+    const bgUrl = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F31%2Fa7%2F2a%2F31a72afda250825d993400c3ef28c55c.gif&f=1&nofb=1&ipt=4c8e50bf53e783409879cf5063387af5474ad962245221eb11121759f6b70017&ipo=images"
+    const keyPress = (e) => {
+      keys += e.key.toLowerCase();
+
+      if (keys.includes("gtown")) {
+        setBg(bgUrl)
+        localStorage.setItem("bg", bgUrl)
+      }
+      if (keys.length > 6) {
+        keys = keys.slice(-6);
+      }
+      console.log(keys)
+    };
+    window.addEventListener("keydown", keyPress);
+    return () => window.removeEventListener("keydown", keyPress);
+  }, [bg])
+
 
   // https://date-fns.org/v4.4.0/docs/format
   const weekNum = getISOWeek(today)
@@ -53,11 +79,18 @@ export default function Dashboard() {
   const monthUpper = month[0].toUpperCase() + month.slice(1)
 
   return (
+    // Responsible for layout of page, nav being on left, content being on right
     <div className="flex h-screen">
-      <Navbar edu={edu} setEdu={setEdu} />
-      {/* Infoboxes at the top of the page. `justify-center` to center the boxes.*/}
-      <div className="flex-1 overflow-auto">
-
+      <Navbar edu={edu} setEdu={setEdu} bg={bg} setBg={setBg} />
+      {/* Funny backgrounds.  also https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F31%2Fa7%2F2a%2F31a72afda250825d993400c3ef28c55c.gif */}
+      <div
+        className="flex-1 overflow-auto bg-no-repeat bg-cover"
+        style={{
+          backgroundColor: bg === "" ? "#313131" : "transparent",
+          backgroundImage: bg !== "" ? `url("${bg}")` : "none"
+        }}
+      >
+        {/* Infoboxes at the top of the page. `justify-center` to center the boxes.*/}
         <div className="flex flex-wrap">
           <Infobox title="Ukenummer" content={weekNum} />
           <Infobox title="Dag" content={dayButActuallyWrittenLikeASemiNormalHumanBeing} />
@@ -74,10 +107,10 @@ export default function Dashboard() {
             <ImgBox link="https://m365.cloud.microsoft/apps" imgLink="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/1280px-Microsoft_logo.svg.png" />
 
             <div className={`transition-all duration-600 overflow-hidden absolute top-full left-0 ${microsoftExpanded ? "opacity-100 max-h-128" : "opacity-0 max-h-0"}`} >
-              <ImgBox link="https://word.cloud.microsoft/" imgLink="https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/word_24x1.svg" />
-              <ImgBox link="https://excel.cloud.microsoft/" imgLink="https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/excel_24x1.svg" />
-              <ImgBox link="https://powerpoint.cloud.microsoft/" imgLink="https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/powerpoint_24x1.svg" />
-              <ImgBox link="https://outlook.cloud.microsoft/" imgLink="https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/outlook_24x1.svg" />
+              <ImgBox link="https://word.cloud.microsoft/" alt="word" imgLink="https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/word_24x1.svg" />
+              <ImgBox link="https://excel.cloud.microsoft/" alt="excel" imgLink="https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/excel_24x1.svg" />
+              <ImgBox link="https://powerpoint.cloud.microsoft/" alt="powerpoint" imgLink="https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/powerpoint_24x1.svg" />
+              <ImgBox link="https://outlook.cloud.microsoft/" alt="outlook" imgLink="https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/outlook_24x1.svg" />
             </div>
           </div>
 
@@ -99,7 +132,7 @@ export default function Dashboard() {
 
         </div>
         {/* Space for more components here. */}
-        
+
       </div>
     </div>
   )
