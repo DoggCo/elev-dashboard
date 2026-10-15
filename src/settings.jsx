@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import Settingsfield from "./Components/settingsfield"
+import check from "./assets/check.svg"
 
 export default function Settings({ setting, setSetting, edu, setEdu, bg, setBg }) {
 
@@ -26,7 +27,7 @@ export default function Settings({ setting, setSetting, edu, setEdu, bg, setBg }
 
           <div className="flex align-middle items-center m-2 p-3">
             <h1 className="text-3xl font-bold">Settings</h1>
-            <button className="ml-auto bg-white rounded-md text-black hover:cursor-pointer w-12 h-12 text-center" onClick={() => setSetting(!setting)}>X</button>
+            <button className="ml-auto bg-white rounded-md text-black hover:cursor-pointer w-12 h-12 text-center justify-center items-center flex" onClick={() => setSetting(!setting)}><img className="w-10" src={check} /></button>
           </div>
           <hr className="mx-3 mb-3 px-3 pb-3" />
           <Settingsfield Title="Edu navn" Description="Edu som er tilknyttet ulike lenker"
