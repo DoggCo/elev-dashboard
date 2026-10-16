@@ -13,6 +13,11 @@ export default function Settings({ setting, setSetting, edu, setEdu, bg, setBg }
       if (e.key === "Escape") {
         setSetting(!setting)
       }
+      // IT SHOULDNT FUCKING WORK!!! this is so fucking retarded. signed martin houdek
+      // Prevents form from doing default URL submit, this is SUCH a retarded way of doing it
+      else if (e.key === "Enter") {
+        setSetting(!setting)
+      }
     }
 
     window.addEventListener("keydown", escSettings)

@@ -28,7 +28,7 @@ export default function Dashboard() {
   })
   const [expanded, setExpanded] = useState({});
   const toggleExpanded = (id, value) => {
-    setExpanded(prev => ({ ...prev, [id]: value}))
+    setExpanded(prev => ({ ...prev, [id]: value }))
   }
 
   // Updates the current time every 999 ms
@@ -49,6 +49,7 @@ export default function Dashboard() {
   useEffect(() => {
     let keys = "cat";
     const bgUrl = "https://www.icegif.com/wp-content/uploads/2024/03/fire-icegif-11.gif"
+    const fih = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F31%2Fa7%2F2a%2F31a72afda250825d993400c3ef28c55c.gif"
     const keyPress = (e) => {
       keys += e.key
       if (keys.includes("gTowN")) {
@@ -58,6 +59,15 @@ export default function Dashboard() {
         } else {
           setBg(bgUrl)
           localStorage.setItem("bg", bgUrl)
+        }
+        keys = ""
+      } else if (keys.includes("fih")) {
+        if (bg === fih) {
+          setBg("")
+          localStorage.setItem("bg", "")
+        } else {
+          setBg(fih)
+          localStorage.setItem("bg", fih)
         }
         keys = ""
       }
@@ -114,11 +124,11 @@ export default function Dashboard() {
               onMouseEnter={() => item.expandable && toggleExpanded(item.id, true)}
               onMouseLeave={() => item.expandable && toggleExpanded(item.id, false)}
             >
-              <ImgBox 
-                link={typeof item.link === "function" ? item.link(edu) : item.link} 
-                imgLink={item.imgLink} 
+              <ImgBox
+                link={typeof item.link === "function" ? item.link(edu) : item.link}
+                imgLink={item.imgLink}
               />
-              
+
               {item.expandable && (
                 <div className={`transition-all duration-600 overflow-hidden absolute top-full left-0 ${expanded[item.id] ? "opacity-100 max-h-128" : "opacity-0 max-h-0"}`}>
                   {item.children.map(child => (
