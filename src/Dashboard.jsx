@@ -28,6 +28,7 @@ export default function Dashboard() {
     const saved = localStorage.getItem("bg")
     return saved || ""
   })
+  const [gtown, setGtown] = useState(false);
 
   // Updates the current time every 999 ms
   useEffect(() => {
@@ -46,22 +47,27 @@ export default function Dashboard() {
   }, [bg])
   useEffect(() => {
     let keys = "cat";
-    const bgUrl = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F31%2Fa7%2F2a%2F31a72afda250825d993400c3ef28c55c.gif&f=1&nofb=1&ipt=4c8e50bf53e783409879cf5063387af5474ad962245221eb11121759f6b70017&ipo=images"
+    const bgUrl = "https://www.icegif.com/wp-content/uploads/2024/03/fire-icegif-11.gif"
     const keyPress = (e) => {
       keys += e.key
-
       if (keys.includes("gTowN")) {
-        setBg(bgUrl)
-        localStorage.setItem("bg", bgUrl)
+        if (gtown) {
+          setBg(bgUrl)
+          localStorage.setItem("bg", bgUrl)
+        } else {
+          setBg("")
+          localStorage.setItem("bg", "")
+        }
+        setGtown(!gtown)
       }
-      if (keys.length > 20) {
-        keys = keys.slice(-20);
+      if (keys.length > 40) {
+        keys = keys.slice(-40);
       }
       keys = keys.replace("Shift", "")
     };
     window.addEventListener("keydown", keyPress);
     return () => window.removeEventListener("keydown", keyPress);
-  }, [bg])
+  }, [gtown])
 
 
   // https://date-fns.org/v4.4.0/docs/format
