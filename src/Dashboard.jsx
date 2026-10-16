@@ -26,7 +26,6 @@ export default function Dashboard() {
     const saved = localStorage.getItem("bg")
     return saved || ""
   })
-  const [gtown, setGtown] = useState(false);
   const [expanded, setExpanded] = useState({});
   const toggleExpanded = (id, value) => {
     setExpanded(prev => ({ ...prev, [id]: value}))
@@ -53,14 +52,14 @@ export default function Dashboard() {
     const keyPress = (e) => {
       keys += e.key
       if (keys.includes("gTowN")) {
-        if (gtown) {
-          setBg(bgUrl)
-          localStorage.setItem("bg", bgUrl)
-        } else {
+        if (bg === bgUrl) {
           setBg("")
           localStorage.setItem("bg", "")
+        } else {
+          setBg(bgUrl)
+          localStorage.setItem("bg", bgUrl)
         }
-        setGtown(!gtown)
+        keys = ""
       }
       if (keys.length > 40) {
         keys = keys.slice(-40);
@@ -69,7 +68,7 @@ export default function Dashboard() {
     };
     window.addEventListener("keydown", keyPress);
     return () => window.removeEventListener("keydown", keyPress);
-  }, [gtown])
+  }, [bg])
 
 
   // https://date-fns.org/v4.4.0/docs/format
