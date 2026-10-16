@@ -3,8 +3,8 @@ import { nb } from "date-fns/locale"
 import Infobox from "./Infobox"
 import { useEffect, useState } from "react"
 import ImgBox from "./imgBox"
-import outline from "./assets/outline.svg"
 import Navbar from "./Navbar"
+import { Links } from "./links"
 
 /* 
 TODO list
@@ -17,8 +17,6 @@ add a sidebar navbar.
 
 export default function Dashboard() {
   const [today, setToday] = useState(new Date())
-  const [microsoftExpanded, setMicrosoftExpanded] = useState(false)
-  const [imagderExpanded, setImagderExpanded] = useState(false)
   // Tries to get edu from localstorage and set it into the edu state, if it doesnt exist then "edu" is default
   const [edu, setEdu] = useState(() => {
     const saved = localStorage.getItem("edu")
@@ -29,6 +27,10 @@ export default function Dashboard() {
     return saved || ""
   })
   const [gtown, setGtown] = useState(false);
+  const [expanded, setExpanded] = useState({});
+  const toggleExpanded = (id, value) => {
+    setExpanded(prev => ({ ...prev, [id]: value}))
+  }
 
   // Updates the current time every 999 ms
   useEffect(() => {
@@ -79,8 +81,6 @@ export default function Dashboard() {
   const clockTime = format(today, "pp", { locale: nb })
   const clockTimeAMPM = format(today, "p")
 
-  const proxmoxLink = `https://${edu}.pm.sevgs.no`
-
   const dayButActuallyWrittenLikeASemiNormalHumanBeing = day[0].toUpperCase() + day.slice(1)
   const monthUpper = month[0].toUpperCase() + month.slice(1)
 
@@ -106,38 +106,36 @@ export default function Dashboard() {
         </div>
 
 
-        {/* Row of image buttons which send you to a different pages */}
+        {/* Row of image buttons which send you to a different pages. The links used here are located "./links.jsx" */}
         <div className="flex">
-          {/* Microsoft button, which expands */}
-          <div className="relative flex flex-col" onMouseEnter={() => setMicrosoftExpanded(true)} onMouseLeave={() => setMicrosoftExpanded(false)} >
-            <ImgBox link="https://m365.cloud.microsoft/apps" imgLink="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/1280px-Microsoft_logo.svg.png" />
-
-            <div className={`transition-all duration-600 overflow-hidden absolute top-full left-0 ${microsoftExpanded ? "opacity-100 max-h-128" : "opacity-0 max-h-0"}`} >
-              <ImgBox link="https://word.cloud.microsoft/" alt="word" imgLink="https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/word_24x1.svg" />
-              <ImgBox link="https://excel.cloud.microsoft/" alt="excel" imgLink="https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/excel_24x1.svg" />
-              <ImgBox link="https://powerpoint.cloud.microsoft/" alt="powerpoint" imgLink="https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/powerpoint_24x1.svg" />
-              <ImgBox link="https://outlook.cloud.microsoft/" alt="outlook" imgLink="https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/outlook_24x1.svg" />
+          {Links.map(item => (
+            <div
+              key={item.id}
+              className="relative flex flex-col"
+              onMouseEnter={() => item.expandable && toggleExpanded(item.id, true)}
+              onMouseLeave={() => item.expandable && toggleExpanded(item.id, false)}
+            >
+              <ImgBox 
+                link={typeof item.link === "function" ? item.link(edu) : item.link} 
+                imgLink={item.imgLink} 
+              />
+              
+              {item.expandable && (
+                <div className={`transition-all duration-600 overflow-hidden absolute top-full left-0 ${expanded[item.id] ? "opacity-100 max-h-128" : "opacity-0 max-h-0"}`}>
+                  {item.children.map(child => (
+                    <ImgBox
+                      key={child.alt}
+                      link={typeof child.link === "function" ? child.link(edu) : child.link}
+                      imgLink={child.imgLink}
+                      alt={child.alt}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
-
-          {/* More regular image buttons */}
-          <ImgBox link="https://agder.itslearning.com/CourseCards" imgLink="https://cdn.itslearning.com/v2026.10.1.10336/images/logo-badge.svg" />
-          <ImgBox link="https://sameyde-vgs.inschool.visma.no/" imgLink="https://assets.inschool.visma.no/R-7.4.1.2-90e34c83/assets/images-new/favicons/favicon-32x32.png" />
-
-          {/* IMAgder button, which expands */}
-          <div className="relative flex flex-col" onMouseEnter={() => setImagderExpanded(true)} onMouseLeave={() => setImagderExpanded(false)}>
-            <ImgBox link="https://elev.imagder.no/" imgLink="https://elev.imagder.no/favicon.ico" />
-
-            <div className={`transition-all duration-600 overflow-hidden absolute top-full left-0 ${imagderExpanded ? "opacity-100 max-h-128" : "opacity-0 max-h-0"}`}>
-              <ImgBox link="https://gitlab.sevgs.no/" imgLink="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.freebiesupply.com%2Flogos%2Flarge%2F2x%2Fgitlab-logo-png-transparent.png" />
-              <ImgBox link="https://outline.sevgs.no/" imgLink={outline} />
-              <ImgBox link={proxmoxLink} imgLink="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/proxmox.svg" />
-            </div>
-          </div>
-          {/* More space for regular images buttons here */}
-
+          ))}
         </div>
-        {/* Space for more components here. */}
+        {/* Space for more regular shit here */}
 
       </div>
     </div>
