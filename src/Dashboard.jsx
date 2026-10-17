@@ -122,11 +122,11 @@ export default function Dashboard() {
       >
         {/* Infoboxes at the top of the page. `justify-center` to center the boxes.*/}
         <div className="flex flex-wrap">
-          <Infobox title="Ukenummer" content={weekNum} />
-          <Infobox title="Dag" content={dayButActuallyWrittenLikeASemiNormalHumanBeing} />
-          <Infobox title="Dato" content={date} />
-          <Infobox title="Måned" content={<>{monthUpper} <br /> {monthNum} / 12</>} />
-          <Infobox title="Klokke" content={<>{clockTime} <br /> {clockTimeAMPM} </>} />
+          <Infobox title="Ukenummer" content={[weekNum]} />
+          <Infobox title="Dag" content={[dayButActuallyWrittenLikeASemiNormalHumanBeing]} />
+          <Infobox title="Dato" content={[date]} />
+          <Infobox title="Måned" content={[month, `${monthNum} / 12`]}/>
+          <Infobox title="Klokke" content={[clockTime, clockTimeAMPM]} />
         </div>
 
 
