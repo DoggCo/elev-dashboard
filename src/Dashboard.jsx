@@ -14,6 +14,16 @@ add a sidebar navbar.
   - dashboard page
   - settins page, for stuff like edu, background, maybe other stuff?
 
+to-do list?
+
+calendar maybe?
+
+that one sound thing from the other repo
+
+weather info (api. fuck.)
+
+a timer
+
 */
 
 export default function Dashboard() {
