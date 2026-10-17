@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import ImgBox from "./imgBox"
 import Navbar from "./Navbar"
 import { Links } from "./links"
+import metalGear from "./assets/metalgear.mp3"
 
 /* 
 TODO list
@@ -46,10 +47,20 @@ export default function Dashboard() {
   useEffect(() => {
     localStorage.setItem("bg", bg)
   }, [bg])
+
+  // Easter eggs, typing ones.
   useEffect(() => {
     let keys = "cat";
     const bgUrl = "https://www.icegif.com/wp-content/uploads/2024/03/fire-icegif-11.gif"
     const fih = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F31%2Fa7%2F2a%2F31a72afda250825d993400c3ef28c55c.gif"
+    const konami = "ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba"
+
+    let audio = new Audio(metalGear)
+    const playMetalGear = () => {
+      audio.volume = 0.2
+      audio.play()
+    }
+
     const keyPress = (e) => {
       keys += e.key
       if (keys.includes("gTowN")) {
@@ -70,9 +81,13 @@ export default function Dashboard() {
           localStorage.setItem("bg", fih)
         }
         keys = ""
+      } else if (keys.includes(konami)) {
+        playMetalGear()
+        keys = ""
       }
-      if (keys.length > 40) {
-        keys = keys.slice(-40);
+      console.log(keys)
+      if (keys.length > 80) {
+        keys = keys.slice(-80);
       }
       keys = keys.replace("Shift", "")
     };
