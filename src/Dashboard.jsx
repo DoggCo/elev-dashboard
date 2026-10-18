@@ -1,11 +1,13 @@
+import { useEffect, useState, useContext } from "react"
 import { getISOWeek, format } from "date-fns"
 import { nb } from "date-fns/locale"
 import Infobox from "./Infobox"
-import { useEffect, useState } from "react"
 import ImgBox from "./imgBox"
 import Navbar from "./Navbar"
 import { Links } from "./links"
 import metalGear from "./assets/metalgear.mp3"
+import Weather from "./weather"
+import { SettingsList } from "./settingsList"
 
 /* 
 TODO list
@@ -27,21 +29,13 @@ a timer
 */
 
 export default function Dashboard() {
+  const { edu, bg, setBg } = useContext(SettingsList);
+  
   const [today, setToday] = useState(new Date())
-  // Tries to get edu from localstorage and set it into the edu state, if it doesnt exist then "edu" is default
-  const [edu, setEdu] = useState(() => {
-    const saved = localStorage.getItem("edu")
-    return saved || "edu0000000"
-  })
-  const [bg, setBg] = useState(() => {
-    const saved = localStorage.getItem("bg")
-    return saved || ""
-  })
   const [expanded, setExpanded] = useState({});
   const toggleExpanded = (id, value) => {
     setExpanded(prev => ({ ...prev, [id]: value }))
   }
-
   // Updates the current time every 999 ms
   useEffect(() => {
     const interval = setInterval(() => {
@@ -49,14 +43,6 @@ export default function Dashboard() {
     }, 999)
     return () => clearInterval(interval)
   }, [])
-
-  // Updates edu in local storage whenever it gets updated.
-  useEffect(() => {
-    localStorage.setItem("edu", edu)
-  }, [edu])
-  useEffect(() => {
-    localStorage.setItem("bg", bg)
-  }, [bg])
 
   // Easter eggs, typing ones.
   useEffect(() => {
@@ -74,22 +60,10 @@ export default function Dashboard() {
     const keyPress = (e) => {
       keys += e.key
       if (keys.includes("gTowN")) {
-        if (bg === bgUrl) {
-          setBg("")
-          localStorage.setItem("bg", "")
-        } else {
-          setBg(bgUrl)
-          localStorage.setItem("bg", bgUrl)
-        }
+        setBg(bg === bgUrl ? "" : bgUrl)
         keys = ""
       } else if (keys.includes("fih")) {
-        if (bg === fih) {
-          setBg("")
-          localStorage.setItem("bg", "")
-        } else {
-          setBg(fih)
-          localStorage.setItem("bg", fih)
-        }
+        setBg(bg === fih ? "" : fih)
         keys = ""
       } else if (keys.includes(konami)) {
         playMetalGear()
@@ -121,7 +95,7 @@ export default function Dashboard() {
   return (
     // Responsible for layout of page, nav being on left, content being on right
     <div className="flex h-screen">
-      <Navbar edu={edu} setEdu={setEdu} bg={bg} setBg={setBg} />
+      <Navbar />
       {/* Funny backgrounds.  also https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F31%2Fa7%2F2a%2F31a72afda250825d993400c3ef28c55c.gif */}
       <div
         className="flex-1 overflow-auto bg-no-repeat bg-cover"
@@ -135,7 +109,7 @@ export default function Dashboard() {
           <Infobox title="Ukenummer" content={[weekNum]} />
           <Infobox title="Dag" content={[dayButActuallyWrittenLikeASemiNormalHumanBeing]} />
           <Infobox title="Dato" content={[date]} />
-          <Infobox title="Måned" content={[month, `${monthNum} / 12`]}/>
+          <Infobox title="Måned" content={[monthUpper, `${monthNum} / 12`]} />
           <Infobox title="Klokke" content={[clockTime, clockTimeAMPM]} />
         </div>
 
@@ -170,7 +144,7 @@ export default function Dashboard() {
           ))}
         </div>
         {/* Space for more regular shit here */}
-
+        <Weather />
       </div>
     </div>
   )

@@ -15,7 +15,7 @@ export default function Navbar({edu, setEdu, bg, setBg}) {
         </div>
       </nav>
 
-      {setting && <Settings setting={setting} setSetting={setSetting} edu={edu} setEdu={setEdu} bg={bg} setBg={setBg} />}
+      {setting && <Settings setting={setting} setSetting={setSetting}/>}
     </>
   )
 }

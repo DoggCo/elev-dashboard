@@ -1,9 +1,12 @@
-import { useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import Settingsfield from "./Components/settingsfield"
 import check from "./assets/check.svg"
 import SetText from "./Components/setText"
+import { SettingsList } from "./settingsList"
 
-export default function Settings({ setting, setSetting, edu, setEdu, bg, setBg }) {
+export default function Settings({setting, setSetting}) {
+  const {lon, setLon, lat, setLat, edu, setEdu, bg, setBg} = useContext(SettingsList)
+
 
   const fuckOff = (e) => {
     e.stopPropagation()
@@ -41,6 +44,12 @@ export default function Settings({ setting, setSetting, edu, setEdu, bg, setBg }
           />
           <Settingsfield Title="Background" Description="URL for background on dashboard. GIF virker også."
             Content={<SetText t={bg} setT={setBg} />}
+          />
+          <Settingsfield Title="Temp lon" Description="Longitude brukt for værmelding."
+            Content={<SetText t={lon} setT={setLon} />}
+          />
+          <Settingsfield Title="Temp lat" Description="Latitude brukt for værmelding."
+            Content={<SetText t={lat} setT={setLat} />}
           />
 
           <Settingsfield Title="Title" Description="Description" Content={<form><input name="test" defaultValue="test" className=""></input></form>} />
