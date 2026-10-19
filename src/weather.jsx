@@ -33,10 +33,17 @@ export default function Weather() {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-wrap">
       <Infobox
         title="Temperatur" content={[weather.properties ? (
           <h1>{weather.properties.timeseries[0].data.instant.details.air_temperature}°C</h1>
+        ) : (
+          <p>Loading.</p>
+        )]}
+      />
+      <Infobox
+        title="Vær" content={[weather.properties ? (
+          <h1>{weather.properties.timeseries[0].data.next_1_hours.summary.symbol_code}</h1>
         ) : (
           <p>Loading.</p>
         )]}

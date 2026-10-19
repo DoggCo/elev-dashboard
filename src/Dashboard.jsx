@@ -69,7 +69,6 @@ export default function Dashboard() {
         playMetalGear()
         keys = ""
       }
-      console.log(keys)
       if (keys.length > 80) {
         keys = keys.slice(-80);
       }
@@ -105,6 +104,7 @@ export default function Dashboard() {
         }}
       >
         {/* Infoboxes at the top of the page. `justify-center` to center the boxes.*/}
+        {/* Uses arrays to pass in content, if it has more than 1 then it inserts a linebreak */}
         <div className="flex flex-wrap">
           <Infobox title="Ukenummer" content={[weekNum]} />
           <Infobox title="Dag" content={[dayButActuallyWrittenLikeASemiNormalHumanBeing]} />

@@ -4,8 +4,13 @@ import check from "./assets/check.svg"
 import SetText from "./Components/setText"
 import { SettingsList } from "./settingsList"
 
-export default function Settings({setting, setSetting}) {
-  const {lon, setLon, lat, setLat, edu, setEdu, bg, setBg} = useContext(SettingsList)
+export default function Settings({ setting, setSetting }) {
+  const {
+    lon, setLon,
+    lat, setLat,
+    edu, setEdu,
+    bg, setBg
+  } = useContext(SettingsList)
 
 
   const fuckOff = (e) => {
@@ -34,28 +39,42 @@ export default function Settings({setting, setSetting}) {
       {/* The actual settings panel */}
       <div className="bg-gray-600 w-5/6 h-5/6 mx-auto my-auto rounded-md overflow-y-auto" onClick={(e) => fuckOff(e)}>
 
-          <div className="flex align-middle items-center m-2 p-3">
-            <h1 className="text-3xl font-bold">Settings</h1>
-            <button className="ml-auto bg-white rounded-md text-black hover:cursor-pointer w-12 h-12 text-center justify-center items-center flex" onClick={() => setSetting(!setting)}><img className="w-10" src={check} /></button>
-          </div>
-          <hr className="mx-3 mb-3 px-3 pb-3" />
-          <Settingsfield Title="Edu navn" Description="Edu som er tilknyttet ulike lenker"
-            Content={<SetText t={edu} setT={setEdu} />}
-          />
-          <Settingsfield Title="Background" Description="URL for background on dashboard. GIF virker også."
-            Content={<SetText t={bg} setT={setBg} />}
-          />
-          <Settingsfield Title="Temp lon" Description="Longitude brukt for værmelding."
-            Content={<SetText t={lon} setT={setLon} />}
-          />
-          <Settingsfield Title="Temp lat" Description="Latitude brukt for værmelding."
-            Content={<SetText t={lat} setT={setLat} />}
-          />
+        <div className="flex align-middle items-center m-2 p-3">
+          <h1 className="text-3xl font-bold">Settings</h1>
+          <button className="ml-auto bg-white rounded-md text-black hover:cursor-pointer w-12 h-12 text-center justify-center items-center flex" onClick={() => setSetting(!setting)}><img className="w-10" src={check} /></button>
+        </div>
+        <hr className="mx-3 mb-3 px-3 pb-3" />
 
-          <Settingsfield Title="Title" Description="Description" Content={<form><input name="test" defaultValue="test" className=""></input></form>} />
-          <Settingsfield Title="A longer title that needs more lines" Description="A very long description that will eventually overlap maybe? Unless it goes down. I need to write more text to test this though. Okay." Content={<form><input name="test" defaultValue="test" className=""></input></form>} />
-
-
+        {/* Settingsfield components. Passes a title, description content which is a useState value.
+        It has a defaultvalue, and a function which restores default which takes a setter. */}
+        <Settingsfield
+          Title="Edu navn"
+          Description="Edu som er tilknyttet ulike lenker"
+          Content={<SetText t={edu} setT={setEdu} />}
+          defaultValue="edu0000000"
+          onRestore={setEdu}
+        />
+        <Settingsfield
+          Title="Background"
+          Description="URL for background on dashboard. GIF virker også."
+          Content={<SetText t={bg} setT={setBg} />}
+          defaultValue=""
+          onRestore={setBg}
+        />
+        <Settingsfield
+          Title="Temp lon"
+          Description="Longitude brukt for værmelding."
+          Content={<SetText t={lon} setT={setLon} />}
+          defaultValue="8.724792241505867"
+          onRestore={setLon}
+        />
+        <Settingsfield
+          Title="Temp lat"
+          Description="Latitude brukt for værmelding."
+          Content={<SetText t={lat} setT={setLat} />}
+          defaultValue="58.48122513472694"
+          onRestore={setLat}
+        />
       </div>
     </div>
   )
