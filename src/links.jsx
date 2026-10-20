@@ -1,7 +1,9 @@
 import outline from "./assets/outline.svg"
 import githubLogo from "./assets/github.png"
+import { useContext } from "react";
+import { SettingsList } from "./settingsList";
 
-export const Links = [
+export const createLinks = (edu, github) => [
   {
     id: "microsoft",
     imgLink: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/1280px-Microsoft_logo.svg.png",
@@ -58,14 +60,14 @@ export const Links = [
       },
       {
         alt: "proxmox",
-        link: ({edu}) => `https://${edu}.pm.sevgs.no`,
+        link: `https://${edu}.pm.sevgs.no`,
         imgLink: "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/proxmox.svg"
       },
     ]
   },
   {
     id: "github",
-    link: ({github}) => `https://github.com/${github}`,
+    link: `https://github.com/${github}`,
     imgLink: githubLogo
   }
 ];

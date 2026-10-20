@@ -4,7 +4,7 @@ import { nb } from "date-fns/locale"
 import Infobox from "./Infobox"
 import ImgBox from "./imgBox"
 import Navbar from "./Navbar"
-import { Links } from "./links"
+import { createLinks } from "./links"
 import metalGear from "./assets/metalgear.mp3"
 import Weather from "./weather"
 import { SettingsList } from "./settingsList"
@@ -33,10 +33,11 @@ a timer
 */
 
 export default function Dashboard() {
-  const { edu, bg, setBg, github } = useContext(SettingsList);
+  const { bg, setBg, edu, github } = useContext(SettingsList);
 
   const [today, setToday] = useState(new Date())
   const [expanded, setExpanded] = useState({});
+  const links = createLinks(edu, github);
   const toggleExpanded = (id, value) => {
     setExpanded(prev => ({ ...prev, [id]: value }))
   }
@@ -117,10 +118,9 @@ export default function Dashboard() {
           <Infobox title="Klokke" content={[clockTime, clockTimeAMPM]} />
         </div>
 
-
         {/* Row of image buttons which send you to a different pages. The links used here are located "./links.jsx" */}
-        <div className="flex">
-          {Links.map(item => (
+        <div className="flex flex-wrap">
+          {links.map(item => (
             <div
               key={item.id}
               className="relative flex flex-col"
@@ -128,16 +128,16 @@ export default function Dashboard() {
               onMouseLeave={() => item.expandable && toggleExpanded(item.id, false)}
             >
               <ImgBox
-                link={typeof item.link === "function" ? item.link({ edu, github}) : item.link}
+                link={item.link}
                 imgLink={item.imgLink}
               />
 
               {item.expandable && (
-                <div className={`transition-all duration-600 overflow-hidden absolute top-full left-0 ${expanded[item.id] ? "opacity-100 max-h-128" : "opacity-0 max-h-0"}`}>
+                <div className={`transition-all duration-600 overflow-hidden absolute top-full left-0 z-2 ${expanded[item.id] ? "opacity-100 max-h-128" : "opacity-0 max-h-0"}`}>
                   {item.children.map(child => (
                     <ImgBox
                       key={child.alt}
-                      link={typeof child.link === "function" ? child.link({ edu, github}) : child.link}
+                      link={child.link}
                       imgLink={child.imgLink}
                       alt={child.alt}
                     />

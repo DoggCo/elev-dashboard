@@ -36,16 +36,16 @@ export default function Weather() {
     <>
       <Infobox
         title="Temperatur" content={[weather.properties ? (
-          <h1>{weather.properties.timeseries[0].data.instant.details.air_temperature}°C</h1>
+          <>{weather.properties.timeseries[0].data.instant.details.air_temperature}°C</>
         ) : (
-          <p>Loading.</p>
-        )]}
+          <>Loading.</>
+        ),]}
       />
       <Infobox
         title="Vær" content={[weather.properties ? (
-          <h1>{weather.properties.timeseries[0].data.next_1_hours.summary.symbol_code}</h1>
+          <>{weather.properties.timeseries[0].data.next_1_hours.summary.symbol_code}</>
         ) : (
-          <p>Loading.</p>
+          <>Loading.</>
         )]}
       />
     </>
