@@ -10,13 +10,15 @@ export function SettingsProvider({ children }) {
   const [bg, setBg] = useStateHelper("bg", "");
   const [lat, setLat] = useStateHelper("lat", "58.4812")
   const [lon, setLon] = useStateHelper("lon", "8.7248")
+  const [github, setGithub] = useStateHelper("github", "")
 
   return (
     <SettingsList.Provider value={{ 
         edu, setEdu, 
         bg, setBg, 
         lat, setLat, 
-        lon, setLon
+        lon, setLon,
+        github, setGithub
         
         }}>
       {children}

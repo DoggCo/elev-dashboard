@@ -9,7 +9,8 @@ export default function Settings({ setting, setSetting }) {
     lon, setLon,
     lat, setLat,
     edu, setEdu,
-    bg, setBg
+    bg, setBg,
+    github, setGithub
   } = useContext(SettingsList)
 
 
@@ -62,15 +63,22 @@ export default function Settings({ setting, setSetting }) {
           onRestore={setBg}
         />
         <Settingsfield
+          Title="Github"
+          Description="Github username"
+          Content={<SetText t={github} setT={setGithub} />}
+          defaultValue=""
+          onRestore={setGithub}
+        />
+        <Settingsfield
           Title="Temp lon"
-          Description="Longitude brukt for værmelding."
+          Description="Longitude brukt for værmelding. Default location er Sam Eyde VGS"
           Content={<SetText t={lon} setT={setLon} />}
           defaultValue="8.724792241505867"
           onRestore={setLon}
         />
         <Settingsfield
           Title="Temp lat"
-          Description="Latitude brukt for værmelding."
+          Description="Latitude brukt for værmelding. Default location er Sam Eyde VGS"
           Content={<SetText t={lat} setT={setLat} />}
           defaultValue="58.48122513472694"
           onRestore={setLat}

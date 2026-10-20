@@ -1,4 +1,5 @@
 import outline from "./assets/outline.svg"
+import githubLogo from "./assets/github.png"
 
 export const Links = [
   {
@@ -7,25 +8,25 @@ export const Links = [
     link: "https://m365.cloud.microsoft/apps",
     expandable: true,
     children: [
-      { 
-        alt: "word", 
-        link: "https://word.cloud.microsoft/", 
-        imgLink: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/word_24x1.svg" 
+      {
+        alt: "word",
+        link: "https://word.cloud.microsoft/",
+        imgLink: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/word_24x1.svg"
       },
-      { 
-        alt: "excel", 
-        link: "https://excel.cloud.microsoft/", 
-        imgLink: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/excel_24x1.svg" 
+      {
+        alt: "excel",
+        link: "https://excel.cloud.microsoft/",
+        imgLink: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/excel_24x1.svg"
       },
-      { 
-        alt: "powerpoint", 
-        link: "https://powerpoint.cloud.microsoft/", 
-        imgLink: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/powerpoint_24x1.svg" 
+      {
+        alt: "powerpoint",
+        link: "https://powerpoint.cloud.microsoft/",
+        imgLink: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/powerpoint_24x1.svg"
       },
-      { 
-        alt: "outlook", 
-        link: "https://outlook.cloud.microsoft/", 
-        imgLink: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/outlook_24x1.svg" 
+      {
+        alt: "outlook",
+        link: "https://outlook.cloud.microsoft/",
+        imgLink: "https://res.cdn.office.net/midgard/versionless/fluentui-resources/4.0.5/assets/brand-icons/product/svg/outlook_24x1.svg"
       },
     ]
   },
@@ -57,9 +58,14 @@ export const Links = [
       },
       {
         alt: "proxmox",
-        link: (edu) => `https://${edu}.pm.sevgs.no`,
+        link: ({edu}) => `https://${edu}.pm.sevgs.no`,
         imgLink: "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/proxmox.svg"
       },
     ]
   },
+  {
+    id: "github",
+    link: ({github}) => `https://github.com/${github}`,
+    imgLink: githubLogo
+  }
 ];

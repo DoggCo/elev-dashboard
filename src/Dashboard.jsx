@@ -16,6 +16,10 @@ add a sidebar navbar.
   - dashboard page
   - settins page, for stuff like edu, background, maybe other stuff?
 
+possibly add a background to the infoboxes, saying in the top left something
+like "time info" and "weather info". it can take a prop with the title and 
+it returns a div with some styling. maybe?
+
 to-do list?
 
 calendar maybe?
@@ -29,8 +33,8 @@ a timer
 */
 
 export default function Dashboard() {
-  const { edu, bg, setBg } = useContext(SettingsList);
-  
+  const { edu, bg, setBg, github } = useContext(SettingsList);
+
   const [today, setToday] = useState(new Date())
   const [expanded, setExpanded] = useState({});
   const toggleExpanded = (id, value) => {
@@ -124,7 +128,7 @@ export default function Dashboard() {
               onMouseLeave={() => item.expandable && toggleExpanded(item.id, false)}
             >
               <ImgBox
-                link={typeof item.link === "function" ? item.link(edu) : item.link}
+                link={typeof item.link === "function" ? item.link({ edu, github}) : item.link}
                 imgLink={item.imgLink}
               />
 
@@ -133,7 +137,7 @@ export default function Dashboard() {
                   {item.children.map(child => (
                     <ImgBox
                       key={child.alt}
-                      link={typeof child.link === "function" ? child.link(edu) : child.link}
+                      link={typeof child.link === "function" ? child.link({ edu, github}) : child.link}
                       imgLink={child.imgLink}
                       alt={child.alt}
                     />
@@ -144,7 +148,9 @@ export default function Dashboard() {
           ))}
         </div>
         {/* Space for more regular shit here */}
-        <Weather />
+        <div className="flex flex-wrap">
+          <Weather />
+        </div>
       </div>
     </div>
   )
