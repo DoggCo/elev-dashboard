@@ -12,10 +12,6 @@ import { SettingsList } from "./settingsList"
 /* 
 TODO list
 
-add a sidebar navbar.
-  - dashboard page
-  - settins page, for stuff like edu, background, maybe other stuff?
-
 possibly add a background to the infoboxes, saying in the top left something
 like "time info" and "weather info". it can take a prop with the title and 
 it returns a div with some styling. maybe?
@@ -26,9 +22,10 @@ calendar maybe?
 
 that one sound thing from the other repo
 
-weather info (api. fuck.)
-
 a timer
+
+double click reset to actually reset a setting.
+undo a reset
 
 */
 
@@ -67,7 +64,7 @@ export default function Dashboard() {
       if (keys.includes("gTowN")) {
         setBg(bg === bgUrl ? "" : bgUrl)
         keys = ""
-      } else if (keys.includes("fih")) {
+      } else if (keys.includes("fiH")) {
         setBg(bg === fih ? "" : fih)
         keys = ""
       } else if (keys.includes(konami)) {

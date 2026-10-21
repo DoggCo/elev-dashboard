@@ -73,14 +73,14 @@ export default function Settings({ setting, setSetting }) {
           Title="Temp lon"
           Description="Longitude brukt for værmelding. Default location er Sam Eyde VGS"
           Content={<SetText t={lon} setT={setLon} />}
-          defaultValue="8.724792241505867"
+          defaultValue="8.7248"
           onRestore={setLon}
         />
         <Settingsfield
           Title="Temp lat"
           Description="Latitude brukt for værmelding. Default location er Sam Eyde VGS"
           Content={<SetText t={lat} setT={setLat} />}
-          defaultValue="58.48122513472694"
+          defaultValue="58.4812"
           onRestore={setLat}
         />
       </div>

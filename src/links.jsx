@@ -1,7 +1,5 @@
 import outline from "./assets/outline.svg"
 import githubLogo from "./assets/github.png"
-import { useContext } from "react";
-import { SettingsList } from "./settingsList";
 
 export const createLinks = (edu, github) => [
   {

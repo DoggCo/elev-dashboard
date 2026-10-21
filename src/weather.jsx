@@ -17,20 +17,25 @@ export default function Weather() {
       })
   }
   useEffect(() => {
-    if (lat && lon) {
-      getWeatherData();
-    }
-  }, [lat, lon]);
-
-  useEffect(() => {
     const handleStorageChange = (e) => {
       if (e.key === "lat") setLat(e.newValue);
       if (e.key === "lon") setLon(e.newValue);
     };
-
+    if (lat && lon) {
+      getWeatherData();
+    }
+    const interval = setInterval(() => {
+      if (lat && lon) {
+        getWeatherData();
+      }
+    }, 60000);
     window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, [lat, lon]);
+
 
   return (
     <>
