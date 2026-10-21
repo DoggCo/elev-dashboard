@@ -8,6 +8,7 @@ import { createLinks } from "./links"
 import metalGear from "./assets/metalgear.mp3"
 import Weather from "./weather"
 import { SettingsList } from "./settingsList"
+import Timer from "./Timer"
 
 /* 
 TODO list
@@ -148,6 +149,7 @@ export default function Dashboard() {
         <div className="flex flex-wrap">
           <Weather />
         </div>
+        <Timer />
       </div>
     </div>
   )
