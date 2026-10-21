@@ -49,7 +49,7 @@ export default function Timer() {
 		<>
 			{timer}
 			<br />
-			<button onClick={clear}>clear</button>
+			<button onClick={clickReset}>clear</button>
 		</>
 	)
 }
