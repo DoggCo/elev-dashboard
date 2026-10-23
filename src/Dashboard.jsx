@@ -9,6 +9,7 @@ import metalGear from "./assets/metalgear.mp3"
 import Weather from "./weather"
 import { SettingsList } from "./settingsList"
 import SoundThing from "./Components/soundThing"
+import Timer from "./Components/Timer"
 
 /* 
 TODO list
