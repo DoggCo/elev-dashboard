@@ -8,7 +8,7 @@ import { createLinks } from "./links"
 import metalGear from "./assets/metalgear.mp3"
 import Weather from "./weather"
 import { SettingsList } from "./settingsList"
-import SoundThing from "./Components/soundThing"
+import SoundBoxes from "./soundBoxes"
 import Timer from "./Components/Timer"
 
 /* 
@@ -150,7 +150,7 @@ export default function Dashboard() {
         <div className="flex flex-wrap">
           <Weather />
         </div>
-        <SoundThing label="Hi." />
+        <SoundBoxes />
       </div>
     </div>
   )

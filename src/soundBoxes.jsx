@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SoundThing from "./Components/soundThing";
 import metalGear from "./assets/metalgear.mp3"
 
@@ -14,17 +14,32 @@ how do i do this? i dont fucking know :sob: :sob: :sob:
 */
 
 export default function SoundBoxes() {
-  let sound = new Audio(metalGear)
-  const [volume, setVolume] = useState(0)
-
-  const playAudio = (audio) => {
-    audio.volume = volume;
-    audio.play();
-  }
-
+  const sounds = [
+    { label: "METAL GEAR!!!!", file: metalGear },
+    { label: "not metal gear", file: metalGear },
+  ]
   return (
     <div>
-      <SoundThing label="hi" sound={playAudio(sound)} volume={volume} />
+      {sounds.map((sound, id) => (
+        <SoundDih key={id} label={sound.label} soundFile={sound.file} />
+      ))}
     </div>
   )
+}
+function SoundDih({ label, soundFile }) {
+  const audioRef = useRef(new Audio(soundFile));
+  const [vol, setVol] = useState(0);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    audio.volume = vol;
+    audio.loop = true;
+
+    if (vol > 0) {
+      audio.play().catch(err => console.warn("GO FUCK YOURSELF!!!!!!!!:", err));
+    } else {
+      audio.pause()
+    }
+  }, [vol])
+  return <SoundThing label={label} onVolChange={setVol} />
 }
