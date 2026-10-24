@@ -12,7 +12,10 @@ export function SettingsProvider({ children }) {
   const [lon, setLon] = useStateHelper("lon", "8.7248")
   const [github, setGithub] = useStateHelper("github", "")
   const [showAudio, setShowAudio] = useStateHelper("showAudio", true)
+
+  // Settings which dont need localstorage, do useState here
   const [showSettings, setShowSettings] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   return (
     <SettingsList.Provider value={{ 
@@ -22,7 +25,8 @@ export function SettingsProvider({ children }) {
         lon, setLon,
         github, setGithub,
         showAudio, setShowAudio,
-        showSettings, setShowSettings
+        showSettings, setShowSettings,
+        isPlaying, setIsPlaying
         
         }}>
       {children}

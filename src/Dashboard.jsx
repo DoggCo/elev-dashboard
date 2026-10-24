@@ -32,7 +32,7 @@ undo a reset
 */
 
 export default function Dashboard() {
-  const { bg, setBg, edu, github, showAudio, showSettings, setShowSettings } = useContext(SettingsList);
+  const { bg, setBg, edu, github, showAudio, showSettings, setShowSettings, isPlaying } = useContext(SettingsList);
 
   const [today, setToday] = useState(new Date())
   const [expanded, setExpanded] = useState({});
@@ -154,7 +154,7 @@ export default function Dashboard() {
         {/* TODO!!! if you activate sound, and then toggle sound on and off, then it kinda break 
           IDEA TO FIX! make a isPlaying or a pause state and pause everything when the button in Navbar is clicked
         */}
-        {showAudio && <SoundBoxes />}
+        {showAudio &&  <SoundBoxes />}
       </div>
     </div>
   )

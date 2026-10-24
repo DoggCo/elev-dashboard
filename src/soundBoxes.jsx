@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import SoundThing from "./Components/soundThing";
 import metalGear from "./assets/metalgear.mp3"
+import { SettingsList } from "./settingsList";
 
 /*
 Plan:
@@ -15,13 +16,13 @@ how do i do this? i dont fucking know :sob: :sob: :sob:
 
 export default function SoundBoxes() {
   const sounds = [
-    { id: 2, label: "METAL GEAR!!!!", file: metalGear },
-    { id: 1, label: "not metal gear", file: metalGear },
+    { id: 1, label: "METAL GEAR!!!!", file: metalGear },
+    { id: 2, label: "not metal gear", file: metalGear },
   ]
   return (
-    <div className="flex">
+    <div className="flex flex-wrap">
       {sounds.map((sound) => (
-        <div key={sound.id} className="bg-blue-300 p-3 flex-col flex">
+        <div key={sound.id} className="bg-blue-900 p-3 flex-col flex m-3 rounded-md">
           <SoundDih label={sound.label} soundFile={sound.file} />
         </div>
       ))}
@@ -29,6 +30,8 @@ export default function SoundBoxes() {
   )
 }
 function SoundDih({ label, soundFile }) {
+  const { setIsPlaying } = useContext(SettingsList)
+
   const audioRef = useRef(new Audio(soundFile));
   const [vol, setVol] = useState(0);
 
@@ -39,8 +42,10 @@ function SoundDih({ label, soundFile }) {
 
     if (vol > 0) {
       audio.play().catch(err => console.error("Audio Slider:", err));
+      setIsPlaying(true)
     } else {
       audio.pause()
+      setIsPlaying(false)
     }
   }, [vol])
   return <SoundThing label={label} onVolChange={setVol} />
