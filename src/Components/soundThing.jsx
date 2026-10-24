@@ -10,12 +10,12 @@ export default function SoundThing({ label, onVolChange }) {
   }
 
   return (
-    <div>
+    <>
       <label>{label}</label>
       <input
         type="range" min="0" max="0.5" step="0.001" value={value} onChange={change}
         className=""
       ></input>
-    </div>
+    </>
   )
 }

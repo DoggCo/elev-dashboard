@@ -15,13 +15,15 @@ how do i do this? i dont fucking know :sob: :sob: :sob:
 
 export default function SoundBoxes() {
   const sounds = [
-    { label: "METAL GEAR!!!!", file: metalGear },
-    { label: "not metal gear", file: metalGear },
+    { id: 2, label: "METAL GEAR!!!!", file: metalGear },
+    { id: 1, label: "not metal gear", file: metalGear },
   ]
   return (
-    <div>
-      {sounds.map((sound, id) => (
-        <SoundDih key={id} label={sound.label} soundFile={sound.file} />
+    <div className="flex">
+      {sounds.map((sound) => (
+        <div key={sound.id} className="bg-blue-300 p-3 flex-col flex">
+          <SoundDih label={sound.label} soundFile={sound.file} />
+        </div>
       ))}
     </div>
   )
