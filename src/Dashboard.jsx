@@ -9,7 +9,7 @@ import metalGear from "./assets/metalgear.mp3"
 import Weather from "./weather"
 import { SettingsList } from "./settingsList"
 import SoundBoxes from "./soundBoxes"
-import Timer from "./Components/Timer"
+import Settings from "./settings"
 
 /* 
 TODO list
@@ -32,7 +32,7 @@ undo a reset
 */
 
 export default function Dashboard() {
-  const { bg, setBg, edu, github } = useContext(SettingsList);
+  const { bg, setBg, edu, github, showAudio, showSettings, setShowSettings } = useContext(SettingsList);
 
   const [today, setToday] = useState(new Date())
   const [expanded, setExpanded] = useState({});
@@ -99,6 +99,7 @@ export default function Dashboard() {
     // Responsible for layout of page, nav being on left, content being on right
     <div className="flex h-screen">
       <Navbar />
+      {showSettings && <Settings setting={showSettings} setSetting={setShowSettings}/>}
       {/* Funny backgrounds.  also https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F31%2Fa7%2F2a%2F31a72afda250825d993400c3ef28c55c.gif */}
       <div
         className="flex-1 overflow-auto bg-no-repeat bg-cover"
@@ -150,7 +151,7 @@ export default function Dashboard() {
         <div className="flex flex-wrap">
           <Weather />
         </div>
-        <SoundBoxes />
+        {showAudio && <SoundBoxes />}
       </div>
     </div>
   )

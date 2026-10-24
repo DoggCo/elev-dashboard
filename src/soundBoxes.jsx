@@ -36,7 +36,7 @@ function SoundDih({ label, soundFile }) {
     audio.loop = true;
 
     if (vol > 0) {
-      audio.play().catch(err => console.warn("GO FUCK YOURSELF!!!!!!!!:", err));
+      audio.play().catch(err => console.error("Audio Slider:", err));
     } else {
       audio.pause()
     }

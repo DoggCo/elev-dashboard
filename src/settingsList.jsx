@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import useStateHelper from "./Components/useStateHelper";
 
 export const SettingsList = createContext();
@@ -11,6 +11,8 @@ export function SettingsProvider({ children }) {
   const [lat, setLat] = useStateHelper("lat", "58.4812")
   const [lon, setLon] = useStateHelper("lon", "8.7248")
   const [github, setGithub] = useStateHelper("github", "")
+  const [showAudio, setShowAudio] = useStateHelper("showAudio", true)
+  const [showSettings, setShowSettings] = useState(false)
 
   return (
     <SettingsList.Provider value={{ 
@@ -18,7 +20,9 @@ export function SettingsProvider({ children }) {
         bg, setBg, 
         lat, setLat, 
         lon, setLon,
-        github, setGithub
+        github, setGithub,
+        showAudio, setShowAudio,
+        showSettings, setShowSettings
         
         }}>
       {children}
