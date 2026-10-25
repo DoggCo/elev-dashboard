@@ -151,10 +151,8 @@ export default function Dashboard() {
         <div className="flex flex-wrap">
           <Weather />
         </div>
-        {/* TODO!!! if you activate sound, and then toggle sound on and off, then it kinda break 
-          IDEA TO FIX! make a isPlaying or a pause state and pause everything when the button in Navbar is clicked
-        */}
-        {showAudio &&  <SoundBoxes />}
+          
+        {showAudio && <SoundBoxes />}
       </div>
     </div>
   )

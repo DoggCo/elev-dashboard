@@ -15,7 +15,7 @@ export function SettingsProvider({ children }) {
 
   // Settings which dont need localstorage, do useState here
   const [showSettings, setShowSettings] = useState(false)
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(true)
 
   return (
     <SettingsList.Provider value={{ 

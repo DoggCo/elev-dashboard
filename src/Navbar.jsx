@@ -14,7 +14,7 @@ export default function Navbar() {
           >Settings</button>
 
           <button className="bg-cyan-950 p-3 m-2 text-center rounded-md hover:cursor-pointer"
-            onClick={() => {if (!isPlaying) {setShowAudio(!showAudio)}}}
+            onClick={() => {const bleh = !showAudio; {setIsPlaying(bleh); setShowAudio(bleh)}}}
           >Toggle Sounds</button>
 
         </div>
