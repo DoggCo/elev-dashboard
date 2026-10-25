@@ -2,6 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import Infobox from "./Infobox";
 import { SettingsList } from "./settingsList";
 
+const getIcon = (code) => {
+  return `https://raw.githubusercontent.com/metno/weathericons/refs/heads/main/weather/svg/${code}.svg`;
+}
+
 export default function Weather() {
   const [weather, setWeather] = useState({})
   const { lon, setLon, lat, setLat } = useContext(SettingsList);
@@ -48,7 +52,7 @@ export default function Weather() {
       />
       <Infobox
         title="Vær" content={[weather.properties ? (
-          <>{weather.properties.timeseries[0].data.next_1_hours.summary.symbol_code}</>
+          <div className="flex justify-center items-center gap-2"><img src={getIcon(weather.properties.timeseries[0].data.next_1_hours.summary.symbol_code)} alt={weather.properties.timeseries[0].data.next_1_hours.summary.symbol_code} className="w-14" /><>{weather.properties.timeseries[0].data.next_1_hours.summary.symbol_code}</></div>
         ) : (
           <>Loading.</>
         )]}
