@@ -9,11 +9,9 @@ export default function Infobox({ title, content }) {
         <div className="text-2xl">
           {content.map((thing, index) => (
             <div key={index}>
-              <div>
                 {thing}
                 {/* If array is longer than 1 item, add <br> */}
                 {content.length > 1 && index < content.length - 1 && <br />}
-              </div>
             </div>
           ))}
         </div>
