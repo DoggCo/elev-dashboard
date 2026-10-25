@@ -5,7 +5,7 @@ import Infobox from "./Infobox"
 import ImgBox from "./imgBox"
 import Navbar from "./Navbar"
 import { createLinks } from "./links"
-import metalGear from "./assets/metalgear.mp3"
+import metalGear from "./assets/audio/metalgear.mp3"
 import Weather from "./weather"
 import { SettingsList } from "./settingsList"
 import SoundBoxes from "./soundBoxes"
@@ -151,7 +151,7 @@ export default function Dashboard() {
         <div className="flex flex-wrap">
           <Weather />
         </div>
-          
+
         {showAudio && <SoundBoxes />}
       </div>
     </div>

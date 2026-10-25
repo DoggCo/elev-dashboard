@@ -1,15 +1,22 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import SoundThing from "./Components/soundThing";
-import metalGear from "./assets/metalgear.mp3"
 import { SettingsList } from "./settingsList";
+import birds from "./assets/audio/birds.wav"
+import crickets from "./assets/audio/crickets.mp3"
+import rain from "./assets/audio/rain.mp3"
+import river from "./assets/audio/river.wav"
+import wind from "./assets/audio/wind.wav"
 import pause from "./assets/pause.svg"
 import play from "./assets/play.svg"
 
 export default function SoundBoxes() {
   const { setIsPlaying, isPlaying } = useContext(SettingsList)
   const sounds = [
-    { id: 1, label: "METAL GEAR!!!!", file: metalGear },
-    { id: 2, label: "not metal gear", file: metalGear },
+    { id: 1, label: "Birds", file: birds },
+    { id: 2, label: "Crickets", file: crickets },
+    { id: 3, label: "Rain", file: rain },
+    { id: 4, label: "River", file: river },
+    { id: 5, label: "Wind", file: wind },
   ]
   // TODOOOOOO!!! YAY!!! global volume slider somewhere, should it use localstorage? idfk.
   return (
