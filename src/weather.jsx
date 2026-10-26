@@ -52,7 +52,7 @@ export default function Weather() {
       />
       <Infobox
         title="Vær" content={[weather.properties ? (
-          <div className="flex justify-center items-center gap-2"><img src={getIcon(weather.properties.timeseries[0].data.next_1_hours.summary.symbol_code)} alt={weather.properties.timeseries[0].data.next_1_hours.summary.symbol_code} className="w-14" /><>{weather.properties.timeseries[0].data.next_1_hours.summary.symbol_code}</></div>
+          <div className="flex justify-center flex-wrap items-center gap-2"><img src={getIcon(weather.properties.timeseries[0].data.next_1_hours.summary.symbol_code)} alt={weather.properties.timeseries[0].data.next_1_hours.summary.symbol_code} className="w-14" /><>{weather.properties.timeseries[0].data.next_1_hours.summary.symbol_code}</></div>
         ) : (
           <>Loading.</>
         )]}

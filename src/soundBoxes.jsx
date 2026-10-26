@@ -3,27 +3,32 @@ import SoundThing from "./Components/soundThing";
 import { SettingsList } from "./settingsList";
 import pause from "./assets/pause.svg"
 import play from "./assets/play.svg"
-import {sounds} from "./soundFiles"
+import { sounds } from "./soundFiles"
 
 export default function SoundBoxes() {
   const { setIsPlaying, isPlaying } = useContext(SettingsList)
-  const [ masterVol, setMasterVol ] = useState(1)
+  const [masterVol, setMasterVol] = useState(1)
 
   return (
     <div className="flex flex-col">
-      <button
-        onClick={() => setIsPlaying(!isPlaying)}
-        className="flex bg-gray-800 rounded-md hover:cursor-pointer w-fit p-3 m-3"
-      ><img src={ isPlaying ? pause : play} /></button>
-      <input
-        id="master-volume"
-        type="range"
-        min="0"
-        max="1"
-        step="0.01"
-        value={masterVol}
-        onChange={(e) => setMasterVol(parseFloat(e.target.value))}
-      ></input>
+      <div className="flex">
+        <button
+          onClick={() => setIsPlaying(!isPlaying)}
+          className="flex bg-gray-800 rounded-md hover:cursor-pointer w-fit p-3 m-3"
+        ><img src={isPlaying ? pause : play} /></button>
+        <div className="bg-blue-900 flex-col p-3 rounded-md">
+          <label>Master Volume: {Math.round(masterVol * 100)}%</label>
+          <input className="flex"
+            id="master-volume"
+            type="range"
+            min="0"
+            max="2"
+            step="0.01"
+            value={masterVol}
+            onChange={(e) => setMasterVol(parseFloat(e.target.value))}
+          ></input>
+        </div>
+      </div>
       <div className="flex flex-wrap">
         {sounds.map((sound) => (
           <div key={sound.id} className="bg-blue-900 p-3 flex-col flex m-3 rounded-md">
