@@ -127,6 +127,9 @@ export default function Dashboard() {
               className="relative flex flex-col"
               onMouseEnter={() => item.expandable && toggleExpanded(item.id, true)}
               onMouseLeave={() => item.expandable && toggleExpanded(item.id, false)}
+              // For keyboard losers.
+              onFocus={() => item.expandable && toggleExpanded(item.id, true)}
+              onBlur={() => item.expandable && toggleExpanded(item.id, false)}
             >
               <ImgBox
                 link={item.link}

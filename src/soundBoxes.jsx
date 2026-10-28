@@ -11,10 +11,11 @@ export default function SoundBoxes() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex">
+      <div className="flex p-3">
         <button
           onClick={() => setIsPlaying(!isPlaying)}
-          className="flex bg-gray-800 rounded-md hover:cursor-pointer w-fit p-3 m-3"
+          // Very stupid way of doing margin.
+          className="flex bg-gray-800 rounded-md hover:cursor-pointer w-fit p-3 my-3 mr-3"
         ><img src={isPlaying ? pause : play} /></button>
         <div className="bg-blue-900 flex-col p-3 rounded-md">
           <label>Master Volume: {Math.round(masterVol * 100)}%</label>
