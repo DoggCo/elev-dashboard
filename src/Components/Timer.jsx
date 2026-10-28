@@ -22,16 +22,17 @@ export default function Timer() {
   }, [active])
 
   return (
-    <div className="m-3">
+    <div className="flex m-3 bg-mauve-900 text-center w-fit rounded-md border border-solid" >
+      <div className="flex flex-col p-3">
       <h1>{timeLeft}</h1>
-      <div className="">
-
-      <button onClick={() => setActive(!active)} className="hover:cursor-pointer p-3">
-        {active ? "pause" : "play"}
-      </button>
-      <button onClick={() => setTimeLeft(60)}>
-        Reset
-      </button>
+      <div className="flex gap-3">
+        <button onClick={() => setActive(!active)} className="hover:cursor-pointer">
+          {active ? "Pause" : "Play"}
+        </button>
+        <button onClick={() => setTimeLeft(60)}>
+          Reset
+        </button>
+      </div>
       </div>
     </div>
   )
