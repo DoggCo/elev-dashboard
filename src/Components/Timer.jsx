@@ -14,6 +14,8 @@ export default function Timer() {
     audio.play()
   }
 
+  // TODO: PAUSE DOESNT FUCKING WORK!!! 😭😭😭
+
   const handlePlayPause = () => {
     if (!active) {
       const newTime = parseInt(input) || defTime;
