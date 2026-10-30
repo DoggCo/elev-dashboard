@@ -43,13 +43,25 @@ export default function SoundBoxes() {
 function SoundDih({ label, soundFile, masterVol, max }) {
   const { isPlaying } = useContext(SettingsList)
 
-  const audioRef = useRef(new Audio(soundFile));
+  const audioRef = useRef(null);
   const [vol, setVol] = useState(0);
 
   useEffect(() => {
+    audioRef.current = new Audio(soundFile);
+    audioRef.current.loop = true;
+
+    return () => {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  }, [soundFile])
+
+  useEffect(() => {
     const audio = audioRef.current;
+    if (!audio) {
+      return;
+    }
     audio.volume = (vol * max) * masterVol;
-    audio.loop = true;
 
     if (vol > 0 && isPlaying) {
       audio.play().catch(err => console.error("Audio Slider:", err));
@@ -57,11 +69,5 @@ function SoundDih({ label, soundFile, masterVol, max }) {
       audio.pause()
     }
   }, [vol, isPlaying, masterVol])
-  useEffect(() => {
-    return () => {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-  }, [])
   return <SoundThing label={label} onVolChange={setVol} />
 }
