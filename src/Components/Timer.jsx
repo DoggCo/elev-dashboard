@@ -14,13 +14,17 @@ export default function Timer() {
     audio.play()
   }
 
-  // TODO: PAUSE DOESNT FUCKING WORK!!! 😭😭😭
+  // 😭😭😭
 
   const handlePlayPause = () => {
-    if (!active) {
+    if (active) {
+      setInput(timeLeft);
+    } else {
       const newTime = parseInt(input) || defTime;
-      setdefTime(newTime);
-      setTimeLeft(newTime);
+      if (newTime !== defTime) {
+        setdefTime(newTime);
+        setTimeLeft(newTime);
+      }
     }
     setActive(!active);
   }
@@ -59,7 +63,10 @@ export default function Timer() {
           <button onClick={handlePlayPause} className="hover:cursor-pointer w-15">
             {active ? "Pause" : "Play"}
           </button>
-          <button onClick={() => setTimeLeft(defTime)}
+          <button onClick={() => {
+            setTimeLeft(defTime)
+            setInput(defTime)
+          }}
             className="w-15 hover:cursor-pointer"
           >Reset
           </button>
