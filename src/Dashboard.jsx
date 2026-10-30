@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState, useContext, useRef } from "react"
 import { getISOWeek, format } from "date-fns"
 import { nb } from "date-fns/locale"
 import Infobox from "./Infobox"
@@ -41,6 +41,9 @@ export default function Dashboard() {
   const toggleExpanded = (id, value) => {
     setExpanded(prev => ({ ...prev, [id]: value }))
   }
+
+  const audioRef = useRef(null);
+
   // Updates the current time every 999 ms
   useEffect(() => {
     const interval = setInterval(() => {
@@ -49,18 +52,18 @@ export default function Dashboard() {
     return () => clearInterval(interval)
   }, [])
 
+  useEffect(() => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio(metalGear);
+      audioRef.current.volume = 0.2;
+    }
+  }, [])
   // Easter eggs, typing ones.
   useEffect(() => {
     let keys = "cat";
     const bgUrl = "https://www.icegif.com/wp-content/uploads/2024/03/fire-icegif-11.gif"
     const fih = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F31%2Fa7%2F2a%2F31a72afda250825d993400c3ef28c55c.gif"
     const konami = "ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba"
-
-    let audio = new Audio(metalGear)
-    const playMetalGear = () => {
-      audio.volume = 0.2
-      audio.play()
-    }
 
     const keyPress = (e) => {
       keys += e.key
@@ -71,7 +74,7 @@ export default function Dashboard() {
         setBg(bg === fih ? "" : fih)
         keys = ""
       } else if (keys.includes(konami)) {
-        playMetalGear()
+        audioRef.current.play()
         keys = ""
       }
       if (keys.length > 80) {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import metalGear from "../assets/audio/metalgear.mp3"
 
 export default function Timer() {
@@ -8,10 +8,16 @@ export default function Timer() {
   const [active, setActive] = useState(false);
   const [input, setInput] = useState(defTime);
 
-  let audio = new Audio(metalGear)
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio(metalGear);
+      audioRef.current.volume = 0.2;
+    }
+  }, [])
   const playMetalGear = () => {
-    audio.volume = 0.2
-    audio.play()
+    audioRef.current.play();
   }
 
   // 😭😭😭
