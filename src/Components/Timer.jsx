@@ -27,6 +27,7 @@ export default function Timer() {
   }
 
   // 😭😭😭
+  // TODO: when timer hits 0, pressing play bugs out.
 
   const handlePlayPause = () => {
     if (active) {
