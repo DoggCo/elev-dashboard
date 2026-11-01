@@ -6,10 +6,16 @@ export default function Timer() {
   const [defTime, setdefTime] = useState(5)
   const [timeLeft, setTimeLeft] = useState(defTime);
   const [active, setActive] = useState(false);
-  const [input, setInput] = useState(defTime);
+  const [input, setInput] = useState(() => {
+    const saved = localStorage.getItem("timeInput")
+    return saved || defTime
+  });
 
   const audioRef = useRef(null);
 
+  useEffect(() => {
+    localStorage.setItem("timeInput", input)
+  }, [input])
   useEffect(() => {
     if (!audioRef.current) {
       audioRef.current = new Audio(metalGear);
