@@ -27,20 +27,18 @@ export default function Timer() {
   }
 
   // 😭😭😭
-  // TODO: when timer hits 0, pressing play bugs out.
+  // TODO: timer doesnt stay at 0 when its finished. bad ux.
 
   const handlePlayPause = () => {
-    if (active) {
-      setInput(timeLeft);
-    } else {
-      const newTime = parseInt(input) || defTime;
-      if (newTime !== defTime) {
-        setdefTime(newTime);
-        setTimeLeft(newTime);
-      }
-    }
-    setActive(!active);
+  if (!active) {
+    const newTime = parseInt(input) || defTime;
+    setdefTime(newTime);
+    setTimeLeft(newTime);
+  } else {
+    setInput(timeLeft);
   }
+  setActive(!active);
+}
 
   useEffect(() => {
     if (!active) {
