@@ -6,6 +6,7 @@ export default function Timer() {
   const [defTime, setdefTime] = useState(5)
   const [timeLeft, setTimeLeft] = useState(defTime);
   const [active, setActive] = useState(false);
+  const [finished, setFinished] = useState(false)
   const [input, setInput] = useState(() => {
     const saved = localStorage.getItem("timeInput")
     return saved || defTime
@@ -27,15 +28,18 @@ export default function Timer() {
   }
 
   // 😭😭😭
-  // TODO: timer doesnt stay at 0 when its finished. bad ux.
 
   const handlePlayPause = () => {
   if (!active) {
-    const newTime = parseInt(input) || defTime;
-    setdefTime(newTime);
-    setTimeLeft(newTime);
+    if (timeLeft === 0) {
+      const newTime = parseInt(input) || defTime;
+      setdefTime(newTime);
+      setTimeLeft(newTime);
+    }
+    setActive(true);
   } else {
     setInput(timeLeft);
+    setActive(false);
   }
   setActive(!active);
 }
@@ -48,6 +52,7 @@ export default function Timer() {
       setTimeLeft(prev => {
         if (prev <= 1) {
           setActive(false);
+          setFinished(true);
           playMetalGear();
           return 0;
         }
@@ -60,7 +65,7 @@ export default function Timer() {
   return (
     <div className="flex m-3 bg-mauve-900 text-center w-60 rounded-md border border-solid content-center justify-center" >
       <div className="flex flex-col p-3">
-        {active ? (
+        {active || finished ? (
           <h1>{timeLeft}</h1>
         ) : (
           <input className="text-center"
