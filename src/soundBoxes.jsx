@@ -6,7 +6,7 @@ import play from "./assets/play.svg"
 import { sounds } from "./soundFiles"
 
 export default function SoundBoxes() {
-  const { setIsPlaying, isPlaying } = useContext(SettingsList)
+  const { setIsPlaying, isPlaying, showAudio, setShowAudio } = useContext(SettingsList)
   const [masterVol, setMasterVol] = useState(1)
 
   return (
@@ -17,6 +17,13 @@ export default function SoundBoxes() {
           // Very stupid way of doing margin.
           className="flex bg-gray-800 rounded-md hover:cursor-pointer w-fit p-3 my-3 mr-3"
         ><img src={isPlaying ? pause : play} /></button>
+        <button
+        // Extremely retarded way of resetting. Hides audio for a split second, triggering some other logic which resets it.
+          onClick={() => {
+            setShowAudio(false);
+            setTimeout(() => setShowAudio(true), 0);
+          }}
+        >Reset?</button>
         <div className="bg-blue-900 flex-col p-3 rounded-md">
           <label>Master Volume: {Math.round(masterVol * 100)}%</label>
           <input className="flex"
