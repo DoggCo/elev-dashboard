@@ -31,17 +31,14 @@ export default function Timer() {
 
   const handlePlayPause = () => {
   if (!active) {
-    if (timeLeft === 0) {
       const newTime = parseInt(input) || defTime;
       setdefTime(newTime);
       setTimeLeft(newTime);
-    }
-    setActive(true);
-  } else {
+      setActive(true);
+    } else {
     setInput(timeLeft);
     setActive(false);
   }
-  setActive(!active);
 }
 
   useEffect(() => {
@@ -82,6 +79,8 @@ export default function Timer() {
           <button onClick={() => {
             setTimeLeft(defTime)
             setInput(defTime)
+            setFinished(false)
+            setActive(false)
           }}
             className="w-15 hover:cursor-pointer"
           >Reset
