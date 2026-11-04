@@ -3,20 +3,44 @@ import metalGear from "../assets/audio/metalgear.mp3"
 
 export default function Timer() {
   // fuck geeksforgeeks btw
-  const [defTime, setdefTime] = useState(5)
+  const [defTime, setdefTime] = useState(() => {
+    const saved = localStorage.getItem("defTime");
+    return saved ? parseInt(saved) : 5;
+  })
   const [timeLeft, setTimeLeft] = useState(defTime);
   const [active, setActive] = useState(false);
   const [finished, setFinished] = useState(false)
   const [input, setInput] = useState(() => {
     const saved = localStorage.getItem("timeInput")
-    return saved || defTime
+    return saved || "00:05:00"
   });
 
   const audioRef = useRef(null);
 
+  const formatTime = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  }
+
+  const parseTheFuckingTimeYouKnobHead = (timeString) => {
+    const parts = timeString.split(':').map(p => parseInt(p, 10) || 0);
+    
+    if (parts.length === 3) {
+      return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    } else if (parts.length === 2) {
+      return parts[0] * 60 + parts[1];
+    }
+    return parts[0];
+  }
+
   useEffect(() => {
     localStorage.setItem("timeInput", input)
   }, [input])
+  useEffect(() => {
+    localStorage.setItem("defTime", defTime)
+  }, [defTime])
   useEffect(() => {
     if (!audioRef.current) {
       audioRef.current = new Audio(metalGear);
@@ -31,12 +55,12 @@ export default function Timer() {
 
   const handlePlayPause = () => {
   if (!active) {
-      const newTime = parseInt(input) || defTime;
+      const newTime = parseTheFuckingTimeYouKnobHead(input);
       setdefTime(newTime);
       setTimeLeft(newTime);
       setActive(true);
     } else {
-    setInput(timeLeft);
+    setInput(formatTime(timeLeft));
     setActive(false);
   }
 }
@@ -63,13 +87,13 @@ export default function Timer() {
     <div className="flex m-3 bg-mauve-900 text-center w-60 rounded-md border border-solid content-center justify-center" >
       <div className="flex flex-col p-3">
         {active || finished ? (
-          <h1>{timeLeft}</h1>
+          <h1>{formatTime(timeLeft)}</h1>
         ) : (
           <input className="text-center"
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            min="1"
+            placeholder="hh:mm:ss"
           />
         )}
         <div className="flex gap-3 mx-auto">
@@ -78,7 +102,7 @@ export default function Timer() {
           </button>
           <button onClick={() => {
             setTimeLeft(defTime)
-            setInput(defTime)
+            setInput(formatTime(defTime))
             setFinished(false)
             setActive(false)
           }}
