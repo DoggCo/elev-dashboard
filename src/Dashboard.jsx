@@ -23,10 +23,6 @@ to-do list?
 
 calendar maybe?
 
-that one sound thing from the other repo
-
-a timer
-
 double click reset to actually reset a setting.
 undo a reset
 
