@@ -6,7 +6,7 @@ import play from "./assets/play.svg"
 import { sounds } from "./soundFiles"
 
 export default function SoundBoxes() {
-  const { setIsPlaying, isPlaying, showAudio, setShowAudio } = useContext(SettingsList)
+  const { setIsPlaying, isPlaying, setShowAudio } = useContext(SettingsList)
   const [masterVol, setMasterVol] = useState(1)
 
   return (
