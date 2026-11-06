@@ -14,6 +14,7 @@ export default function Timer() {
     const saved = localStorage.getItem("timeInput")
     return saved || "00:05:00"
   });
+  const [masterVol, setMasterVol] = useState(1)
 
   const audioRef = useRef(null);
 
@@ -44,9 +45,9 @@ export default function Timer() {
   useEffect(() => {
     if (!audioRef.current) {
       audioRef.current = new Audio(metalGear);
-      audioRef.current.volume = 0.2;
     }
-  }, [])
+    audioRef.current.volume = 0.2 * masterVol;
+  }, [masterVol])
   const playMetalGear = () => {
     audioRef.current.play();
   }
@@ -109,6 +110,18 @@ export default function Timer() {
             className="w-15 hover:cursor-pointer"
           >Reset
           </button>
+        </div>
+        <div className=" flex-col p-3 rounded-md">
+          <label>Master Volume: {Math.round(masterVol * 100)}%</label>
+          <input className="flex"
+            id="master-volume"
+            type="range"
+            min="0"
+            max="2"
+            step="0.01"
+            value={masterVol}
+            onChange={(e) => setMasterVol(parseFloat(e.target.value))}
+          ></input>
         </div>
       </div>
     </div>
