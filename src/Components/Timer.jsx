@@ -14,6 +14,7 @@ export default function Timer() {
     const saved = localStorage.getItem("timeInput")
     return saved || "00:05:00"
   });
+  const [started, setStarted] = useState(false)
   const [masterVol, setMasterVol] = useState(1)
 
   const audioRef = useRef(null);
@@ -56,9 +57,13 @@ export default function Timer() {
 
   const handlePlayPause = () => {
     if (!active) {
-      const newTime = parseTheFuckingTimeYouKnobHead(input);
-      setdefTime(newTime);
-      setTimeLeft(newTime);
+      const newTime = !started || input !== formatTime(timeLeft);
+      if (newTime) {
+        const realnewTime = parseTheFuckingTimeYouKnobHead(input);
+        setdefTime(realnewTime);
+        setTimeLeft(realnewTime);
+      }
+      setStarted(true);
       setActive(true);
     } else {
       setInput(formatTime(timeLeft));
@@ -75,6 +80,7 @@ export default function Timer() {
         if (prev <= 1) {
           setActive(false);
           setFinished(true);
+          setStarted(false);
           playMetalGear();
           return 0;
         }
@@ -106,6 +112,7 @@ export default function Timer() {
             setInput(formatTime(defTime))
             setFinished(false)
             setActive(false)
+            setStarted(false);
           }}
             className="w-15 hover:cursor-pointer"
           >Reset

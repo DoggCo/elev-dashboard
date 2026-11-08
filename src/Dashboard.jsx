@@ -23,7 +23,6 @@ to-do list?
 
 calendar maybe?
 
-double click reset to actually reset a setting.
 undo a reset
 
 */
