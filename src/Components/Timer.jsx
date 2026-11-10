@@ -119,7 +119,7 @@ export default function Timer() {
           </button>
         </div>
         <div className=" flex-col p-3 rounded-md">
-          <label>Master Volume: {Math.round(masterVol * 100)}%</label>
+          <label>Timer Volume: {Math.round(masterVol * 100)}%</label>
           <input className="flex"
             id="master-volume"
             type="range"

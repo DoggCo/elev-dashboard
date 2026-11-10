@@ -25,6 +25,8 @@ calendar maybe?
 
 undo a reset
 
+a stopwatch next to the timer.
+
 */
 
 export default function Dashboard() {
