@@ -27,6 +27,8 @@ undo a reset
 
 a stopwatch next to the timer.
 
+resizable left bar thing.
+
 */
 
 export default function Dashboard() {
