@@ -1,0 +1,12 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: dockerfile
+    restart: always
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

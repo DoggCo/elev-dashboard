@@ -26,7 +26,7 @@ export default function Timer() {
 
   const parseTheFuckingTimeYouKnobHead = (timeString) => {
     const parts = timeString.split(':').map(p => parseInt(p, 10) || 0);
-    
+
     if (parts.length === 3) {
       return parts[0] * 3600 + parts[1] * 60 + parts[2];
     } else if (parts.length === 2) {
@@ -54,16 +54,16 @@ export default function Timer() {
   // 😭😭😭
 
   const handlePlayPause = () => {
-  if (!active) {
+    if (!active) {
       const newTime = parseTheFuckingTimeYouKnobHead(input);
       setdefTime(newTime);
       setTimeLeft(newTime);
       setActive(true);
     } else {
-    setInput(formatTime(timeLeft));
-    setActive(false);
+      setInput(formatTime(timeLeft));
+      setActive(false);
+    }
   }
-}
 
   useEffect(() => {
     if (!active) {
