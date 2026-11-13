@@ -14,6 +14,8 @@ export default function Timer() {
     const saved = localStorage.getItem("timeInput")
     return saved || "00:05:00"
   });
+  const [started, setStarted] = useState(false)
+  const [masterVol, setMasterVol] = useState(1)
 
   const audioRef = useRef(null);
 
@@ -44,9 +46,9 @@ export default function Timer() {
   useEffect(() => {
     if (!audioRef.current) {
       audioRef.current = new Audio(metalGear);
-      audioRef.current.volume = 0.2;
     }
-  }, [])
+    audioRef.current.volume = 0.2 * masterVol;
+  }, [masterVol])
   const playMetalGear = () => {
     audioRef.current.play();
   }
@@ -55,9 +57,13 @@ export default function Timer() {
 
   const handlePlayPause = () => {
     if (!active) {
-      const newTime = parseTheFuckingTimeYouKnobHead(input);
-      setdefTime(newTime);
-      setTimeLeft(newTime);
+      const newTime = !started || input !== formatTime(timeLeft);
+      if (newTime) {
+        const realnewTime = parseTheFuckingTimeYouKnobHead(input);
+        setdefTime(realnewTime);
+        setTimeLeft(realnewTime);
+      }
+      setStarted(true);
       setActive(true);
     } else {
       setInput(formatTime(timeLeft));
@@ -74,6 +80,7 @@ export default function Timer() {
         if (prev <= 1) {
           setActive(false);
           setFinished(true);
+          setStarted(false);
           playMetalGear();
           return 0;
         }
@@ -105,10 +112,23 @@ export default function Timer() {
             setInput(formatTime(defTime))
             setFinished(false)
             setActive(false)
+            setStarted(false);
           }}
             className="w-15 hover:cursor-pointer"
           >Reset
           </button>
+        </div>
+        <div className=" flex-col p-3 rounded-md">
+          <label>Timer Volume: {Math.round(masterVol * 100)}%</label>
+          <input className="flex"
+            id="master-volume"
+            type="range"
+            min="0"
+            max="2"
+            step="0.01"
+            value={masterVol}
+            onChange={(e) => setMasterVol(parseFloat(e.target.value))}
+          ></input>
         </div>
       </div>
     </div>
