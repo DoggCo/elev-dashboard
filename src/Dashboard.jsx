@@ -29,6 +29,8 @@ a stopwatch next to the timer.
 
 resizable left bar thing.
 
+not a feature, but just better file structure. this shit sucks ass. everything is scattered, and some files are in the wrong folders. yikers.
+
 */
 
 export default function Dashboard() {
