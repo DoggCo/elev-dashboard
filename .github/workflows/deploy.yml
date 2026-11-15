@@ -21,4 +21,4 @@ jobs:
           script: |
             cd /home/magnus/elev-dashboard
             git pull origin main
-            docker-compose up -d --build web
+            docker compose up -d --build web
