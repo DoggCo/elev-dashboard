@@ -34,7 +34,7 @@ not a feature, but just better file structure. this shit sucks ass. everything i
 */
 
 export default function Dashboard() {
-  const { bg, setBg, edu, github, showAudio, showSettings, setShowSettings, isPlaying } = useContext(SettingsList);
+  const { bg, setBg, edu, github, showAudio, showSettings, setShowSettings } = useContext(SettingsList);
 
   const [today, setToday] = useState(new Date())
   const [expanded, setExpanded] = useState({});
