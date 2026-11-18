@@ -11,6 +11,7 @@ import { SettingsList } from "./settingsList"
 import SoundBoxes from "./soundBoxes"
 import Settings from "./settings"
 import Timer from "./Components/Timer"
+import Stopclock from "./Components/Stopclock"
 
 /* 
 TODO list
@@ -159,7 +160,11 @@ export default function Dashboard() {
         <div className="flex flex-wrap">
           <Weather />
         </div>
-        <Timer />
+        <div className="flex">
+          <Timer />
+          <Stopclock />
+        </div>
+
         {showAudio && <SoundBoxes />}
       </div>
     </div>

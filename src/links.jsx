@@ -38,7 +38,7 @@ export const createLinks = (edu, github) => [
   {
     id: "visma",
     link: "https://sameyde-vgs.inschool.visma.no/",
-    imgLink: "https://assets.inschool.visma.no/R-7.4.1.2-90e34c83/assets/images-new/favicons/favicon-32x32.png"
+    imgLink: "https://assets.inschool.visma.no/R-7.4.9.1-18844f20/assets/Images/InSchool_symbol_primary.png"
   },
   {
     id: "imagder",
